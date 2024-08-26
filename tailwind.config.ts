@@ -70,6 +70,8 @@ const config = {
       },
       backgroundImage: {
         bgAuth: "url(/authbg.jpg)",
+        netflixtopCircleSign:
+          "linear-gradient(to right, rgba(33, 13, 22, 1) 16%, rgba(184, 40, 105, 1), rgba(229, 9, 20, 1), rgba(184, 40, 105, 1), rgba(33, 13, 22, 1) 84%)",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
