@@ -1,7 +1,5 @@
 "use client";
-import { Check, ChevronDown, Play, Plus } from "lucide-react";
 import Image from "next/image";
-import InfoModel from "../infomodel";
 import { AuthFreeVideoType } from "./WOMoviesList";
 
 interface WOMovieCardParams {

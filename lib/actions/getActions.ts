@@ -477,6 +477,7 @@ export async function getMyList() {
       return {
         success: false,
         message: "Database connection failed",
+        data:[],
       };
     }
     const user = await getUser();
@@ -484,6 +485,7 @@ export async function getMyList() {
       return {
         success: false,
         message: "User not authenticated",
+        data:[],
       };
     }
     // Fetch user's favorite videos
@@ -508,6 +510,7 @@ export async function getMyList() {
     return {
       success: false,
       message: "Server error",
+      data:[]
     };
   }
 }
