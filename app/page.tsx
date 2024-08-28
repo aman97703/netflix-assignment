@@ -35,7 +35,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="px-4 md:px-12 mt-20 space-y-8">
+        <div className="px-4 md:px-12 pt-20 space-y-8">
           <div className="">
             <p className="text-white text-base md:text-xl lg:text-2xl font-semibold">
               Trending Movies
