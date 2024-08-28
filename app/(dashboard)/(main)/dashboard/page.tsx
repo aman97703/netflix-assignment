@@ -3,8 +3,8 @@ import MovieList from "@/components/dashboard/MovieList";
 import {
   getActionAllByGenre,
   getNextWatch,
-  getRandomMovie,
-  getTopTenMovies,
+  getRandomVideo,
+  getTopTenVideos,
 } from "@/lib/actions/getActions";
 import { getUser } from "@/lib/getUser";
 import { redirectToSignIn } from "@/lib/redirectToSignIn";
@@ -14,11 +14,11 @@ const DashbordPage = async () => {
   if (!user) {
     return redirectToSignIn();
   }
-  const { success, data } = await getRandomMovie();
+  const { success, data } = await getRandomVideo();
   if (!success) {
     return redirectToSignIn();
   }
-  const movieData = await getTopTenMovies();
+  const movieData = await getTopTenVideos();
   const nextWatchData = await getNextWatch();
   const { action, comedy, crime, horror, romance, scifi, thriller } =
     await getActionAllByGenre();

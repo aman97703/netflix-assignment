@@ -1,4 +1,3 @@
-import { Video } from "@prisma/client";
 import {
   Carousel,
   CarouselContent,
@@ -6,15 +5,22 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import MovieCard from "./MovieCard";
-import { getMyFavIds } from "@/lib/actions/getActions";
+import WOMovieCard from "./WOMovieCard";
 
+export type AuthFreeVideoType = {
+  id: string;
+  title: string;
+  description: string;
+  thumbnailUrl: string;
+  genres: string;
+  duration: string;
+  type: string;
+};
 interface MovieListParams {
-  movies: Video[];
+  movies: AuthFreeVideoType[];
 }
 
-const MovieList = async ({ movies }: MovieListParams) => {
-  const { favoriteIds } = await getMyFavIds();
+const WOMoviesList = ({ movies }: MovieListParams) => {
   return (
     movies.length > 0 && (
       <Carousel
@@ -24,15 +30,13 @@ const MovieList = async ({ movies }: MovieListParams) => {
         className="w-full"
       >
         <CarouselContent className="overflow-hidden lg:overflow-visible">
-          {movies.map((movie) => {
-            const isInFavorites = (movieId: string) => favoriteIds?.has(movieId);
-
+          {movies.map((movie:AuthFreeVideoType) => {
             return (
               <CarouselItem
                 key={movie.id}
                 className="md:basis-1/6 sm:basis-1/4 basis-1/3"
               >
-                <MovieCard video={movie}  isInList={isInFavorites(movie.id) || false} />
+                <WOMovieCard video={movie} />
               </CarouselItem>
             );
           })}
@@ -44,4 +48,4 @@ const MovieList = async ({ movies }: MovieListParams) => {
   );
 };
 
-export default MovieList;
+export default WOMoviesList;

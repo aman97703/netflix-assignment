@@ -12,6 +12,7 @@ export async function addToMyList(videoId: string) {
         message: "Database connection failed",
       };
     }
+
     const user = await getUser();
     if (!user || !user.id) {
       return {
@@ -19,14 +20,23 @@ export async function addToMyList(videoId: string) {
         message: "User not authenticated",
       };
     }
-    await db.user.update({
-      where: {
-        id: user.id,
-      },
+
+    // Ensure video exists
+    const video = await db.video.findUnique({
+      where: { id: videoId },
+    });
+    if (!video) {
+      return {
+        success: false,
+        message: "Video not found",
+      };
+    }
+
+    // Add video to user's favorites
+    await db.favoriteVideo.create({
       data: {
-        favoriteVideoIds: {
-          push: videoId,
-        },
+        userId: user.id,
+        videoId: videoId,
       },
     });
 
@@ -35,6 +45,7 @@ export async function addToMyList(videoId: string) {
       message: "Added to list",
     };
   } catch (error) {
+    console.error('Error adding to list:', error);
     return {
       success: false,
       message: "Server error",
@@ -50,6 +61,7 @@ export async function removeFromMyList(videoId: string) {
         message: "Database connection failed",
       };
     }
+
     const user = await getUser();
     if (!user || !user.id) {
       return {
@@ -57,34 +69,21 @@ export async function removeFromMyList(videoId: string) {
         message: "User not authenticated",
       };
     }
-    const currentUser = await db.user.findUnique({
+
+    // Remove video from user's favorites
+    await db.favoriteVideo.deleteMany({
       where: {
-        id: user.id,
-      },
-    });
-    if (!currentUser) {
-      return {
-        success: false,
-        message: "User not authenticated",
-      };
-    }
-    const currentFavIds = currentUser.favoriteVideoIds.filter(
-      (f) => f !== videoId
-    );
-    await db.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        favoriteVideoIds: currentFavIds,
+        userId: user.id,
+        videoId: videoId,
       },
     });
 
     return {
       success: true,
-      message: "Removed From List",
+      message: "Removed from list",
     };
   } catch (error) {
+    console.error('Error removing from list:', error);
     return {
       success: false,
       message: "Server error",

@@ -14,12 +14,12 @@ const EmailHome = () => {
         label="Email Address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="flex-1"
+        className="flex-1 md:w-auto w-full"
       />
       <Button
         size="lg"
         variant={"destructive"}
-        className="text-2xl font-bold py-3 min-h-max h-auto"
+        className="text-2xl font-bold py-3 min-h-max h-auto md:w-auto w-full"
       >
         Get Started <ChevronRight />
       </Button>

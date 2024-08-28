@@ -1,7 +1,7 @@
 "use client";
 import { addToMyList, removeFromMyList } from "@/lib/actions/updateActions";
 import { Video } from "@prisma/client";
-import { Check, ChevronDown, Info, Play, Plus } from "lucide-react";
+import { Check, ChevronDown, Play, Plus } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -38,11 +38,11 @@ const MovieCard = ({ video, isInList }: MovieCardProps) => {
     router.push(`video/${video.id}`);
   };
   return (
-    <div className="group bg-zinc-900 col-span relative h-[12w] p-2">
+    <div className="group bg-zinc-900 col-span relative md:h-[12vw] h-[100px] p-2">
       <Image
         src={video.thumbnailUrl}
         alt={video.title}
-        className="w-full cursor-pointer object-cover transition duration-0 rounded-md group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 h-[12vw]"
+        className="w-full cursor-pointer object-cover transition duration-0 rounded-md group-hover:opacity-90 sm:group-hover:opacity-0 delay-300 md:h-[12vw] h-[100px]"
         width={200}
         height={100}
       />
@@ -50,7 +50,7 @@ const MovieCard = ({ video, isInList }: MovieCardProps) => {
         <Image
           src={video.thumbnailUrl}
           alt={"Thumbnail"}
-          className="cursor-pointer object-cover transition duration shadow-xl w-full h-[12vw]"
+          className="cursor-pointer object-cover transition duration shadow-xl w-full md:h-[12vw] h-[100px]"
           width={200}
           height={100}
         />
