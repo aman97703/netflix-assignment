@@ -96,7 +96,7 @@ export async function getTopTenMovies(type: VideoType) {
         message: "User not authenticated",
       };
     }
-    const videosCount = await db.video.count();
+    const videosCount = await db.video.count({ where: { type } });
     const randomIndex = Math.floor(Math.random() * videosCount);
     const randomVideo = await db.video.findMany({
       where: {
@@ -477,7 +477,7 @@ export async function getMyList() {
       return {
         success: false,
         message: "Database connection failed",
-        data:[],
+        data: [],
       };
     }
     const user = await getUser();
@@ -485,7 +485,7 @@ export async function getMyList() {
       return {
         success: false,
         message: "User not authenticated",
-        data:[],
+        data: [],
       };
     }
     // Fetch user's favorite videos
@@ -510,7 +510,7 @@ export async function getMyList() {
     return {
       success: false,
       message: "Server error",
-      data:[]
+      data: [],
     };
   }
 }

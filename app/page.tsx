@@ -37,16 +37,16 @@ export default async function Home() {
         </div>
       </div>
       <div className="px-4 md:px-12 mt-10 space-y-8">
-        <div className="">
-          <p className="text-white text-base md:text-xl lg:text-2xl font-semibold">
+        <div className="relative">
+          <p className="text-white text-base md:text-xl lg:text-2xl font-semibold md:absolute md:top-16">
             Trending Movies
           </p>
           <WOMoviesList movies={movieData.data || []} />
         </div>
       </div>
       <div className="px-4 md:px-12 mt-10 space-y-8">
-        <div className="">
-          <p className="text-white text-base md:text-xl lg:text-2xl font-semibold">
+        <div className="relative">
+          <p className="text-white text-base md:text-xl lg:text-2xl font-semibold md:absolute md:top-16">
             Trending TV Shows
           </p>
           <WOMoviesList movies={seriesData.data || []} />

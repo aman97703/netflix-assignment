@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 // import { FcGoogle } from "react-icons/fc";
 // import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import { toast } from "@/components/ui/use-toast";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -25,18 +26,39 @@ const LoginPage = () => {
       const { message, success } = await registerUser(name, email, password);
       if (success) {
         setVarient("login");
+      } else {
+        toast({
+          description: message,
+        });
       }
     }
   };
   const handleLogin = async () => {
     if (email && password) {
-      await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-        callbackUrl: "/browse",
-      });
-      router.push("/browse");
+      try {
+        const res: any = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+          callbackUrl: "/browse",
+        });
+        if (res.ok) {
+          router.push("/browse");
+          toast({
+            description: "Logged in successfully",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            description: res.error,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+        toast({
+          description: "Please try again",
+        });
+      }
     }
   };
 

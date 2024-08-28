@@ -23,16 +23,20 @@ const MovieList = async ({ movies }: MovieListParams) => {
         }}
         className="w-full"
       >
-        <CarouselContent className="overflow-hidden lg:overflow-visible">
+        <CarouselContent className="md:pt-[110px] pt-0">
           {movies.map((movie) => {
-            const isInFavorites = (movieId: string) => favoriteIds?.has(movieId);
+            const isInFavorites = (movieId: string) =>
+              favoriteIds?.has(movieId);
 
             return (
               <CarouselItem
                 key={movie.id}
-                className="md:basis-1/6 sm:basis-1/4 basis-1/3"
+                className="md:basis-1/6 sm:basis-1/4 basis-1/2"
               >
-                <MovieCard video={movie}  isInList={isInFavorites(movie.id) || false} />
+                <MovieCard
+                  video={movie}
+                  isInList={isInFavorites(movie.id) || false}
+                />
               </CarouselItem>
             );
           })}
